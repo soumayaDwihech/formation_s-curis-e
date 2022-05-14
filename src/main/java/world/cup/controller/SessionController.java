@@ -1,12 +1,18 @@
 package world.cup.controller;
 
+import world.cup.models.Participant;
 import world.cup.models.Session_formation;
 import world.cup.service.ImplSessionFormationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import world.cup.service.ParticipantService;
+import world.cup.service.ParticipantServiceImpl;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 //@Controller
 //@ResponseBody
@@ -17,7 +23,8 @@ public class SessionController {
 
     @Autowired
     private ImplSessionFormationService sessionService;
-
+    @Autowired
+    private ParticipantServiceImpl participantService;
     //@RequestMapping(value="/session", method=RequestMethod.GET)
     @GetMapping("/allSessions")
     public List<Session_formation> findAll() {
@@ -40,7 +47,17 @@ public class SessionController {
         session_formation.setFormateur(detailsSession_formation.getFormateur());
         session_formation.setFormation(detailsSession_formation.getFormation());
         session_formation.setOrganisme(detailsSession_formation.getOrganisme());
-        
+        Set<Participant> lp = new HashSet<>();
+        if (detailsSession_formation.getParticipant() != null) {
+            for (Participant p : detailsSession_formation.getParticipant()) {
+                Participant participant = participantService.findById(p.getId());
+                lp.add(participant);
+
+            }
+            System.out.println("----------------------------------");
+            System.out.println(lp);
+        session_formation.setParticipant(lp);
+        }
         Session_formation updatedSession_formation = sessionService.save(session_formation);
         return updatedSession_formation;
     }

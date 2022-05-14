@@ -1,6 +1,7 @@
 package world.cup.controller;
 
 import world.cup.models.Formation;
+import world.cup.models.Participant;
 import world.cup.payload.response.*;
 import world.cup.service.ImplFormationService;
 
@@ -19,6 +20,7 @@ public class FormationController {
 
     @Autowired
     ImplFormationService formationService;
+
     
     @GetMapping("/allFormations")
     public List<Formation> findAll() {
@@ -30,6 +32,11 @@ public class FormationController {
         return formationService.save(formation);
     }
 
+
+    @GetMapping("{id}")
+    public Formation findById(@PathVariable("id") Long id) {
+        return formationService.findById(id);
+    }
 
     @DeleteMapping("deleteFormation/{id}")
     public MessageResponse delete(@PathVariable Long id) {
@@ -44,8 +51,15 @@ public class FormationController {
         formation.setBudget(detailsFormation.getBudget());
         formation.setDuree(detailsFormation.getDuree());
         formation.setTitre(detailsFormation.getTitre());
+        formation.setAnnee(detailsFormation.getAnnee());
+        formation.setDomaine(detailsFormation.getDomaine());
         formation.setNb_session(detailsFormation.getNb_session());
+        if (detailsFormation.getSession_formation() != null){
+                formation.setSession_formation(detailsFormation.getSession_formation());
+        }
+
         Formation updatedFormation = formationService.save(formation);
+
         return updatedFormation;
     }
 

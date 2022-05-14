@@ -1,5 +1,7 @@
 package world.cup.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -127,6 +129,8 @@ public class Formation {
 		this.annee = annee;
 	}
 
+
+	@JsonIgnoreProperties({ "formateur" ,"session_formation","participant","formation"})
 	public Domaine getDomaine() {
 		return domaine;
 	}
@@ -135,6 +139,9 @@ public class Formation {
 		this.domaine = domaine;
 	}
 
+
+
+	@JsonIgnoreProperties({  "session_formation","participant","formation"})
 	public Set<Session_formation> getSession_formation() {
 		return session_formation;
 	}
@@ -143,6 +150,19 @@ public class Formation {
 		this.session_formation = session_formation;
 	}
 
-
+	@Override
+	public String toString() {
+		return "Formation{" +
+				"id=" + id +
+				", titre='" + titre + '\'' +
+				", type_formation=" + type_formation +
+				", nb_session=" + nb_session +
+				", duree=" + duree +
+				", budget=" + budget +
+				", annee=" + annee +
+				", domaine=" + domaine +
+				", session_formation=" + session_formation +
+				'}';
+	}
 }
 

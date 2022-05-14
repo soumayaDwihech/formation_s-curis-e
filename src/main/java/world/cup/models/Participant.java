@@ -111,5 +111,20 @@ public  class Participant {
 	public void setProfil(Profil profil) {
 		this.profil = profil;
 	}
+
+	@Override
+	public String toString() {
+		return "Participant{" +
+				"id=" + id +
+				", nom='" + nom + '\'' +
+				", prenom='" + prenom + '\'' +
+				", email='" + email + '\'' +
+				", tel=" + tel +
+				", type=" + type +
+				", organisme=" + organisme +
+				", pays=" + pays +
+				", profil=" + profil +
+				'}';
+	}
 }
 

@@ -12,6 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.validation.annotation.Validated;
 
 
@@ -177,6 +178,7 @@ public class Session_formation {
 	}
 
 
+	@JsonIgnoreProperties({ "formateur" ,"session_formation","participant","formation"})
 
 	public Formation getFormation() {
 		return formation;
@@ -200,7 +202,19 @@ public class Session_formation {
 		this.participants = participants;
 	}
 
-    
-    
-    
+
+	@Override
+	public String toString() {
+		return "Session_formation{" +
+				"id=" + id +
+				", Lieu='" + Lieu + '\'' +
+				", date_debut=" + date_debut +
+				", date_fin=" + date_fin +
+				", nb_participant=" + nb_participant +
+				", formateur=" + formateur +
+				", organisme=" + organisme +
+				", formation=" + formation +
+				", participants=" + participants +
+				'}';
+	}
 }

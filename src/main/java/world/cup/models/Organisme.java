@@ -1,10 +1,14 @@
 package world.cup.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
+
 public class Organisme {
     /**
      *
@@ -64,6 +68,8 @@ public class Organisme {
 		this.libelle = libelle;
 	}
 
+
+	@JsonIgnore
 	public Set<Participant> getParticipant() {
 		return participant;
 	}
@@ -72,6 +78,8 @@ public class Organisme {
 		this.participant = participant;
 	}
 
+
+	@JsonIgnore
 	public Set<Formateur> getFormateur() {
 		return formateur;
 	}
@@ -80,6 +88,7 @@ public class Organisme {
 		this.formateur = formateur;
 	}
 
+	@JsonIgnore
 	public Set<Session_formation> getSession_formation() {
 		return session_formation;
 	}

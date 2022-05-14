@@ -1,5 +1,8 @@
 package world.cup.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -32,7 +35,8 @@ public class Formateur {
     @JoinColumn(name="organisme_id")
     private Organisme organisme;
     
-    @OneToMany(mappedBy="formateur")
+    @JsonIgnore
+	@OneToMany(mappedBy="formateur")
     private Set<Session_formation> session_formation;
 
 	public Formateur() {
@@ -112,6 +116,7 @@ public class Formateur {
 		this.type = type;
 	}
 
+	@JsonIgnoreProperties({ "formateur" ,"session_formation","participant"})
 	public Organisme getOrganisme() {
 		return organisme;
 	}
@@ -119,7 +124,7 @@ public class Formateur {
 	public void setOrganisme(Organisme organisme) {
 		this.organisme = organisme;
 	}
-
+	@JsonIgnoreProperties({ "formateur","organisme" })
 	public Set<Session_formation> getSession_formation() {
 		return session_formation;
 	}
